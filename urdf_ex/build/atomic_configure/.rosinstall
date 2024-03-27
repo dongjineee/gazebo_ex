@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/dongjineee/rover_catkin/src/urdf_ex/build/devel/setup.sh

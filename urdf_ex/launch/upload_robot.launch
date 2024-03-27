@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="robot_description" command="$(find xacro)/xacro '$(find urdf_ex)/urdf/test.urdf.xacro' 
+                                            velodyne_VLP-16_enable:=false 
+                                            velodyne_HDL-32E_enable:=false
+                                            Ouster_os1_64_enable:=false 
+                                            Livox_avia_enable:=false"/>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+</launch>
+

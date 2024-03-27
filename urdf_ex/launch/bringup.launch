@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<launch>
+    <env name="QT_AUTO_SCREEN_SCALE_FACTOR" value="0"/>
+    <env name="GAZEBO_RESOURCE_PATH" value="$(find urdf_ex)"/>
+    
+  <arg name="x_pos" default="0"/>
+  <arg name="y_pos" default="0"/>
+  <arg name="z_pos" default="0"/>
+
+    <!-- <rosparam file="$(find bogie_mobile_robot_gazebo)/config/gazebo_pid_gains.yaml" command="load"/> -->
+    
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true" />
+        <arg name="verbose" value="true"/>
+        <arg name="physics" value="ode"/>
+        
+        <!--<arg name="world_name" value="world/gazebo_rover.world"/>-->
+
+    </include>
+  
+  <include file="$(find urdf_ex)/launch/upload_robot.launch"/>
+  
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model test -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+  
+  <!--
+      <include file="$(find bogie_mobile_robot_description)/launch/upload_robot.launch"/>
+
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+            args="-urdf -model mobile_robot -param robot_description" launch-prefix="bash -c 'sleep 2.0; $0 $@' "/>
+  -->
+</launch>

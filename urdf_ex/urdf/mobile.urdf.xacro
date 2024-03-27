@@ -1,0 +1,454 @@
+<?xml version="1.0" ?>
+
+<robot name="test" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+    <material name="black">
+
+        <color rgba="0.0 0.0 0.0 1.0"/>
+
+    </material>
+
+    <material name="orange">
+        <color rgba="1.0 0.423529411765 0.0392156862745 1.0"/>
+    </material>
+
+    <material name="TEST_COL">
+        <color rgba="0.4196078431372549 0.48627450980392156 0.5215686274509804 0.5" />
+    </material>
+
+    <material name="TEST_COL_1">
+        <color rgba="0.4549019607843137 0.5450980392156862 0.592156862745098 0.7" />
+    </material>
+
+    <xacro:include filename="$(find urdf_ex)/urdf/inertia_macro.urdf.xacro"/>
+
+    <link name="base_footprint"/>
+
+    <joint name="base_joint" type="fixed">
+
+        <parent link="base_footprint"/>
+        <origin rpy="0 0 0" xyz="0 0 0.075"/>
+        <child link="base_link"/>
+
+    </joint>
+
+    <link name="base_link">
+
+        <collision>
+
+            <origin rpy="0 0 0" xyz="0 0 0.02"/>
+
+            <geometry>
+
+                <box size="0.32 0.40 0.16"/>
+
+            </geometry>
+
+        </collision>
+
+        <visual>
+
+            <origin rpy="0 0 0" xyz="0 0 0.02"/>
+            <!-- 가로 32, 세로 40, 높이 16cm , 박스 생성 기준이 사각형의 정가운데임 따라서 8cm 위로 올리고 바퀴가 지면에 닿는 높이를 계산하면 12.5cm 정도 올려야함-->
+            <geometry>
+
+                <box size="0.32 0.40 0.16"/>
+
+            </geometry>
+
+            <material name="TEST_COL"/>
+
+        </visual>
+
+        <inertial>
+
+            <origin rpy="0 0 0" xyz="0 0 0.02"/>
+
+            <mass value="30"/>
+
+            <xacro:box_inertia m="30.0" x="0.32" y="0.40" z="0.16"/>
+
+        </inertial>
+
+    </link>
+
+    <joint name="bearing_join_R" type="continuous">
+
+        <parent link="base_link"/>
+        <origin rpy="0 0 0" xyz="0.16 0.1 -0.015"/>
+        <child link="bearing_link_R"/>
+        
+    </joint>
+  
+ <link name="bearing_link_R">
+
+    <collision>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0"/>
+
+        <geometry>
+
+            <cylinder length="0.01" radius="0.0125"/>
+
+        </geometry>
+
+    </collision>
+
+    <visual>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0"/>
+        <geometry>
+
+        <cylinder length="0.01" radius="0.0125"/>
+
+        </geometry>
+
+        <material name="orange"/>
+
+    </visual>
+
+    <inertial>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0"/>
+
+        <mass value="0.3"/>
+
+       <xacro:cylinder_inertia m="0.3" r="0.0125" h="0.025"/>
+
+    </inertial>
+
+</link>
+
+<joint name="bearing_join_L" type="continuous">
+
+    <parent link="base_link"/>
+    <origin rpy="0 0 0" xyz="-0.16 0.1 -0.015"/>
+    <child link="bearing_link_L"/>
+</joint>
+  
+ <link name="bearing_link_L">
+
+        <collision>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0"/>
+
+            <geometry>
+
+            <cylinder length="0.01" radius="0.0125"/>
+
+            </geometry>
+
+        </collision>
+
+        <visual>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0"/>
+            
+            <geometry>
+
+            <cylinder length="0.01" radius="0.0125"/>
+
+            </geometry>
+
+            <material name="orange"/>
+
+        </visual>
+
+        <inertial>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0"/>
+
+            <mass value="0.3"/>
+
+            <xacro:cylinder_inertia m="0.3" r="0.0125" h="0.025"/>
+
+        </inertial>
+
+    </link>
+
+
+<joint name="bearing_join_U" type="continuous">
+
+    <parent link="base_link"/>
+    <origin rpy="0 0 0" xyz="0.16 -0.1 -0.015"/>
+    <child link="bearing_link_U"/>
+</joint>
+  
+ <link name="bearing_link_U">
+
+    <collision>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <geometry>
+
+            <cylinder length="0.01" radius="0.0125"/>
+
+        </geometry>
+
+    </collision>
+
+    <visual>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+        <geometry>
+
+        <cylinder length="0.01" radius="0.0125"/>
+
+        </geometry>
+
+        <material name="orange"/>
+
+    </visual>
+
+    <inertial>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <mass value="0.3"/>
+
+       <xacro:cylinder_inertia m="0.3" r="0.0125" h="0.025"/>
+
+    </inertial>
+
+</link>
+
+
+<joint name="bearing_join_B" type="continuous">
+
+        <parent link="base_link"/>
+        <origin rpy="0 0 0" xyz="-0.16 -0.1 -0.015"/>
+        <child link="bearing_link_B"/>
+</joint>
+  
+ <link name="bearing_link_B">
+
+    <collision>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <geometry>
+
+            <cylinder length="0.01" radius="0.0125"/>
+
+        </geometry>
+
+    </collision>
+
+    <visual>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+        <geometry>
+
+        <cylinder length="0.01" radius="0.0125"/>
+
+        </geometry>
+
+        <material name="orange"/>
+
+    </visual>
+
+    <inertial>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <mass value="0.3"/>
+
+       <xacro:cylinder_inertia m="0.3" r="0.0125" h="0.025"/>
+
+    </inertial>
+
+</link>
+
+
+<joint name="Wheel_joint_R" type="continuous">
+
+    <parent link="bearing_link_R"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    <child link="Wheel_R"/>
+</joint>
+
+<link name="Wheel_R">
+
+    <collision>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <geometry>
+
+        <cylinder length="0.02" radius="0.13"/>
+
+        </geometry>
+
+    </collision>
+
+    <visual>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <geometry>
+
+        <cylinder length="0.02" radius="0.065"/>
+
+        </geometry>
+
+        <material name="TEST_COL_1"/>
+
+    </visual>
+
+    <inertial>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <mass value="1"/>
+
+        <xacro:cylinder_inertia m="1.0" r="0.013" h="0.02"/>
+
+    </inertial>
+
+</link>
+
+<joint name="Wheel_joint_L" type="continuous">
+
+    <parent link="bearing_link_L"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    <child link="Wheel_L"/>
+</joint>
+
+<link name="Wheel_L">
+
+    <collision>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <geometry>
+
+        <cylinder length="0.02" radius="0.13"/>
+
+        </geometry>
+
+    </collision>
+
+    <visual>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <geometry>
+
+        <cylinder length="0.02" radius="0.065"/>
+
+        </geometry>
+
+        <material name="TEST_COL_1"/>
+
+    </visual>
+
+    <inertial>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <mass value="1"/>
+
+        <xacro:cylinder_inertia m="1.0" r="0.013" h="0.02"/>
+
+    </inertial>
+
+</link>
+
+
+<joint name="Wheel_joint_U" type="continuous">
+
+    <parent link="bearing_link_U"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    <child link="Wheel_U"/>
+
+</joint>
+
+<link name="Wheel_U">
+
+    <collision>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <geometry>
+
+        <cylinder length="0.02" radius="0.13"/>
+
+        </geometry>
+
+    </collision>
+
+    <visual>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <geometry>
+
+        <cylinder length="0.02" radius="0.065"/>
+
+        </geometry>
+
+        <material name="TEST_COL_1"/>
+
+    </visual>
+
+    <inertial>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <mass value="1"/>
+
+        <xacro:cylinder_inertia m="1.0" r="0.013" h="0.02"/>
+
+    </inertial>
+
+</link>
+
+<joint name="Wheel_joint_B" type="continuous">
+
+    <parent link="bearing_link_B"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    <child link="Wheel_B"/>
+</joint>
+
+<link name="Wheel_B">
+
+    <collision>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <geometry>
+
+        <cylinder length="0.02" radius="0.13"/>
+
+        </geometry>
+
+    </collision>
+
+    <visual>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <geometry>
+
+        <cylinder length="0.02" radius="0.065"/>
+
+        </geometry>
+
+        <material name="TEST_COL_1"/>
+
+    </visual>
+
+    <inertial>
+
+        <origin rpy="0 1.57 0" xyz="0 0 0.0"/>
+
+        <mass value="1"/>
+
+        <xacro:cylinder_inertia m="1.0" r="0.013" h="0.02"/>
+    </inertial>
+
+</link>
+
+</robot>
