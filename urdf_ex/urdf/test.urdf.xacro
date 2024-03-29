@@ -32,14 +32,15 @@
         <collision>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <box size="0.32 0.40 0.16"/>
+                <!-- <box size="0.32 0.40 0.16"/> -->
+                <box size="0.40 0.32 0.16"/>
             </geometry>
         </collision>
 
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <box size="0.32 0.40 0.16"/>
+                <box size="0.40 0.32 0.16"/>
             </geometry>
             <material name="TEST_COL"/>
         </visual>
@@ -53,7 +54,7 @@
 
     <joint name="base_joint" type="fixed">
         <parent link="base_footprint"/>
-        <origin rpy="0 0 -1.57" xyz="0 0 0.11"/>
+        <origin rpy="0 0 0" xyz="0 0 0.11"/>
         <child link="base_link"/>
     </joint>
 
@@ -84,20 +85,21 @@
         <joint name="rear_caster_rotate_joint_${prefix}" type="continuous">
             <parent link="base_link"/>
             <child link="rear_caster_rotate_${prefix}"/>
-            <origin rpy="0 0 0" xyz="${dir*0.19} 0.17 -0.04"/>
+            <!-- <origin rpy="0 0 0" xyz="${dir*0.19} 0.17 -0.04"/> -->
+            <origin rpy="0 0 0" xyz=" 0.17 ${dir*0.19} -0.04"/>
             <axis xyz="0 0 1"/>
         </joint>
 
         <link name="rear_caster_wheel_${prefix}">
             <collision>
-                <origin xyz="0 0 0.0" rpy="0 ${pi/2} 0"/>
+                <origin xyz="0 0 0.0" rpy="0 0 0"/>
                 <geometry>
                 <cylinder length="0.02" radius="0.03"/>
                 </geometry>
             </collision>
 
             <visual>
-                <origin xyz="0 0 0.0" rpy="0 ${pi/2} 0"/>
+                <origin xyz="0 0 0.0" rpy="0 0 0"/>
                 <geometry>
                 <cylinder length="0.02" radius="0.03"/>
                 </geometry>
@@ -105,7 +107,7 @@
             </visual>
 
             <inertial>
-                <origin xyz="0 0 0.0" rpy="0 ${pi/2} 0"/>
+                <origin xyz="0 0 0.0" rpy="0 0 0"/>
                 <mass value="0.1"/>
                 <xacro:cylinder_inertia m="0.1" r="0.03" h="0.02"/>
             </inertial>
@@ -114,7 +116,7 @@
         <joint name="rear_caster_wheel_joint_${prefix}" type="continuous">
             <parent link="rear_caster_rotate_${prefix}"/>
             <child link="rear_caster_wheel_${prefix}"/>
-            <origin rpy="0 0 0" xyz="0 -0.02 -0.04"/>
+            <origin rpy="0 1.57 1.57" xyz="-0.02 0 -0.04"/>
             <axis xyz="1 0 0"/>
             <limit effort="1000000" velocity="20.0"/>
         </joint>
@@ -150,20 +152,21 @@
             <parent link="base_link"/>
             <!--origin rpy="0 0 0" xyz="0.16 0.1 -0.015"/-->
             <child link="front_caster_rotate_${prefix}"/>
-            <origin rpy="0 0 0" xyz="${dir*0.19} -0.17 -0.04"/>
+            <!-- <origin rpy="0 0 0" xyz="${dir*0.19} -0.17 -0.04"/> -->
+            <origin rpy="0 0 0" xyz="-0.17 ${dir*0.19} -0.04"/>
             <axis xyz="0 0 1"/>
         </joint>
 
         <link name="front_caster_wheel_${prefix}">
             <collision>
-                <origin xyz="0 0 0.0" rpy="0 ${pi/2} 0"/>
+                <origin xyz="0 0 0.0" rpy="0 0 0"/>
                 <geometry>
                 <cylinder length="0.02" radius="0.03"/>
                 </geometry>
             </collision>
 
             <visual>
-                <origin xyz="0 0 0.0" rpy="0 ${pi/2} 0"/>
+                <origin xyz="0 0 0.0" rpy="0 0 0"/>
                 <geometry>
                 <cylinder length="0.02" radius="0.03"/>
                 </geometry>
@@ -171,7 +174,7 @@
             </visual>
 
             <inertial>
-                <origin xyz="0 0 0.0" rpy="0 ${pi/2} 0"/>
+                <origin xyz="0 0 0.0" rpy="0 0 0"/>
                 <mass value="0.1"/>
                 <xacro:cylinder_inertia m="0.1" r="0.03" h="0.02"/>
             </inertial>
@@ -180,8 +183,8 @@
         <joint name="front_caster_wheel_joint_${prefix}" type="continuous">
             <parent link="front_caster_rotate_${prefix}"/>
             <child link="front_caster_wheel_${prefix}"/>
-            <origin rpy="0 0 0" xyz="0 -0.02 -0.04"/>
-            <axis xyz="1 0 0"/>
+            <origin rpy="0 1.57 1.57" xyz="-0.02 0 -0.04"/>
+            <axis xyz="0 0 1"/>
             <limit effort="1000000" velocity="20.0"/>
         </joint>
     </xacro:macro>
@@ -215,7 +218,7 @@
         <joint name="Wheel_joint_${prefix}" type="continuous">
             <parent link="base_link"/>
             <child link="Wheel_${prefix}"/>
-            <origin rpy="0 1.57 3.14" xyz="${dir*0.18} 0 -0.04"/>
+            <origin rpy="0 1.57 1.57" xyz="0 ${dir*0.18} -0.04"/>
             <axis xyz="0 0 1"/>
             <limit effort="1000000" velocity="20.0"/>
         </joint>
@@ -292,18 +295,18 @@
     <joint name="camera_joint" type="fixed">
         <parent link="base_link"/>
         <child link="camera_link"/>
-        <origin xyz="0.0 0.185 0.30" rpy="0 0 0"/>
+        <origin xyz="0.175 0 0.30" rpy="0 0 0"/>
     </joint>
 
     <link name="camera_link">
         <visual>
             <geometry>
-                <box size="-0.1 0.03 0.03"/>
+                <box size=" 0.03 0.1 0.03"/>
             </geometry>
         </visual>
         <collision>
             <geometry>
-                <box size="-0.1 0.03 0.03"/>
+                <box size=" 0.03 0.1 0.03"/>
             </geometry>
         </collision>
     </link>
@@ -311,7 +314,7 @@
     <joint name="camera_optical_joint" type="fixed">
         <parent link="camera_link"/>
         <child link="camera_link_optical"/>
-        <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
 
     <link name="camera_link_optical">
